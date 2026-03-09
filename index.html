@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Bootcamp - Lass dich zum Pixel-Experten ausbilden!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        google: {
+                            red: '#EA4335',
+                            blue: '#4285F4',
+                            green: '#34A853',
+                            yellow: '#FBBC05',
+                            purple: '#A142F4' // From music station
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .glass-dark {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animated Background Blobs */
+        .blob-bg {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="text-gray-800 antialiased relative selection:bg-google-blue selection:text-white pb-20">
+
+    <!-- Background Blobs -->
+    <div class="blob-bg bg-google-blue w-96 h-96 top-0 left-0 animate-blob"></div>
+    <div class="blob-bg bg-google-red w-96 h-96 top-40 right-10 animate-blob" style="animation-delay: 2s;"></div>
+    <div class="blob-bg bg-google-yellow w-80 h-80 bottom-0 left-20 animate-blob" style="animation-delay: 4s;"></div>
+    <div class="blob-bg bg-google-green w-96 h-96 bottom-20 right-0 animate-blob" style="animation-delay: 6s;"></div>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-16 opacity-0 animate-fade-in-up">
+            <div class="inline-flex items-center justify-center p-4 bg-white rounded-full shadow-lg mb-6">
+                <i class="ph-fill ph-google-logo text-4xl mr-2 text-gray-700"></i>
+                <span class="text-2xl font-bold tracking-tight text-gray-700">Pixel</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
+                📣 Pixel Bootcamp
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 font-light max-w-3xl mx-auto glass p-6 rounded-2xl">
+                Lass dich zum <span class="font-bold text-google-blue">Pixel-Experten</span> ausbilden! Das Pixel Bootcamp schlägt seine Zelte in drei deutschen Städten auf – und wir fordern dich heraus!
+            </p>
+        </header>
+
+        <!-- Core Info Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <!-- Card 1 -->
+            <div class="glass p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 opacity-0 animate-fade-in-up delay-200">
+                <div class="w-14 h-14 rounded-full bg-google-blue/20 flex items-center justify-center mb-6">
+                    <i class="ph-duotone ph-device-mobile text-3xl text-google-blue"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Deine Ausrüstung</h3>
+                <p class="text-gray-600 leading-relaxed">Du erhältst von uns ein <strong>Pixel 10 Smartphone</strong> mit innovativen KI-Funktionen exklusiv für diesen Tag.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="glass p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 opacity-0 animate-fade-in-up delay-400">
+                <div class="w-14 h-14 rounded-full bg-google-red/20 flex items-center justify-center mb-6">
+                    <i class="ph-duotone ph-target text-3xl text-google-red"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Deine Mission</h3>
+                <p class="text-gray-600 leading-relaxed">Alltägliche Herausforderungen mit <strong>Gemini</strong> meistern und unschlagbare Pixel-Argumente für deine Kundengespräche zielsicher auf der Verkaufsfläche platzieren.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="glass p-8 rounded-3xl hover:-translate-y-2 transition-transform duration-300 opacity-0 animate-fade-in-up delay-600">
+                <div class="w-14 h-14 rounded-full bg-google-green/20 flex items-center justify-center mb-6">
+                    <i class="ph-duotone ph-users-three text-3xl text-google-green"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Der Ablauf</h3>
+                <p class="text-gray-600 leading-relaxed">In kleinen Gruppen schicken wir euch durch <strong>fünf aufregende Stationen</strong> - Action garantiert! Findet als Team kreative Lösungen, sammelt Punkte und sichert euch eure Belohnung.</p>
+            </div>
+        </div>
+
+        <!-- The Stations (Visualizing the Nametags) -->
+        <section class="mb-16 glass rounded-3xl p-8 md:p-12 text-center opacity-0 animate-fade-in-up delay-400">
+            <h2 class="text-2xl font-bold mb-8">Die 5 Stationen</h2>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full bg-[#ff7b5e]/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-cooking-pot text-4xl text-[#ff7b5e]"></i>
+                    </div>
+                    <span class="font-semibold text-gray-700">Kochen</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full bg-google-green/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-soccer-ball text-4xl text-google-green"></i>
+                    </div>
+                    <span class="font-semibold text-gray-700">Fussball</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full bg-[#1db1d6]/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-suitcase-rolling text-4xl text-[#1db1d6]"></i>
+                    </div>
+                    <span class="font-semibold text-gray-700">Reisen</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full bg-google-purple/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-headphones text-4xl text-google-purple"></i>
+                    </div>
+                    <span class="font-semibold text-gray-700">Music</span>
+                </div>
+                <div class="flex flex-col items-center group">
+                    <div class="w-20 h-20 rounded-full bg-google-yellow/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <i class="ph-duotone ph-brain text-4xl text-google-yellow"></i>
+                    </div>
+                    <span class="font-semibold text-gray-700">Quiz</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Details & Logistics -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 opacity-0 animate-fade-in-up delay-600">
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">📍</span> Wann & Wo
+                </h3>
+                <p class="mb-4">Du hast die Auswahl zwischen 3 Terminen in <strong>Berlin, Hamburg und München</strong>.</p>
+                <p class="flex items-center text-gray-600">
+                    <i class="ph-duotone ph-clock text-xl mr-2 text-google-blue"></i>
+                    Zwischen 10:00 und 16:00 Uhr, mit einer Pause von 60 Minuten.
+                </p>
+            </div>
+            
+            <div class="glass p-8 rounded-3xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <span class="text-2xl mr-2">🍕</span> Verpflegung
+                </h3>
+                <p>Für eine angemessene Stärkung (Mittagessen & Drinks) ist an allen Standorten gesorgt.</p>
+            </div>
+
+            <div class="glass p-8 rounded-3xl md:col-span-2 border-l-4 border-l-google-red">
+                <h3 class="text-xl font-bold mb-2 flex items-center">
+                    <span class="text-2xl mr-2">❗</span> Wichtiger Hinweis
+                </h3>
+                <p class="text-gray-700">Die Kosten für deine An- und Abreise werden nicht über Google getragen. Bitte sprich vor der Anmeldung mit deinem Vorgesetzten. Diesen haben wir über die Hauptverwaltung bereits informiert.</p>
+            </div>
+        </div>
+
+        <!-- Registration Form Area -->
+        <section id="anmeldung" class="glass-dark rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <!-- Decorative circle inside form -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-google-blue/10 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="text-center mb-10 relative z-10">
+                <h2 class="text-3xl font-bold mb-4">Wappne dich für das nächste Level!</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Die Plätze pro Bootcamp sind auf <strong>40 Personen begrenzt</strong>. Schnell sein lohnt sich! Melde dich jetzt über das Menü an.</p>
+            </div>
+
+            <form id="registrationForm" class="max-w-xl mx-auto relative z-10" onsubmit="handleRegistration(event)">
+                
+                <!-- City Selection -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="location">
+                        Wähle deinen Standort & Termin <span class="text-google-red">*</span>
+                    </label>
+                    <div class="relative">
+                        <select id="location" required class="block appearance-none w-full bg-white/50 border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-xl leading-tight focus:outline-none focus:bg-white focus:border-google-blue focus:ring-2 focus:ring-google-blue/20 transition-all cursor-pointer backdrop-blur-sm">
+                            <option value="" disabled selected>Dropdown-Menü öffnen...</option>
+                            <option value="berlin">📍 Berlin | 05.05.2026 | 10:00 - 16:00 Uhr</option>
+                            <option value="muenchen">📍 München | 09.06.2026 | 10:00 - 16:00 Uhr</option>
+                            <option value="hamburg">📍 Hamburg | 23.06.2026 | 10:00 - 16:00 Uhr</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
+                            <i class="ph-bold ph-caret-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Name input -->
+                <div class="mb-6 grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="vorname">Vorname <span class="text-google-red">*</span></label>
+                        <input class="w-full bg-white/50 border border-gray-300 text-gray-700 py-3 px-4 rounded-xl focus:outline-none focus:bg-white focus:border-google-blue focus:ring-2 focus:ring-google-blue/20 transition-all" id="vorname" type="text" required placeholder="Max">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="nachname">Nachname <span class="text-google-red">*</span></label>
+                        <input class="w-full bg-white/50 border border-gray-300 text-gray-700 py-3 px-4 rounded-xl focus:outline-none focus:bg-white focus:border-google-blue focus:ring-2 focus:ring-google-blue/20 transition-all" id="nachname" type="text" required placeholder="Mustermann">
+                    </div>
+                </div>
+
+                <!-- Email & Market -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Geschäftliche E-Mail <span class="text-google-red">*</span></label>
+                    <input class="w-full bg-white/50 border border-gray-300 text-gray-700 py-3 px-4 rounded-xl focus:outline-none focus:bg-white focus:border-google-blue focus:ring-2 focus:ring-google-blue/20 transition-all" id="email" type="email" required placeholder="name@markt.de">
+                </div>
+                
+                <div class="mb-8">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="markt">Dein Markt / Filiale <span class="text-google-red">*</span></label>
+                    <input class="w-full bg-white/50 border border-gray-300 text-gray-700 py-3 px-4 rounded-xl focus:outline-none focus:bg-white focus:border-google-blue focus:ring-2 focus:ring-google-blue/20 transition-all" id="markt" type="text" required placeholder="z.B. Saturn Alexanderplatz">
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="w-full bg-gray-900 hover:bg-google-blue text-white font-bold py-4 px-8 rounded-xl transition-colors duration-300 shadow-lg flex items-center justify-center group">
+                    <span>Jetzt verbindlich anmelden</span>
+                    <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </form>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="successMessage" class="hidden max-w-xl mx-auto text-center py-12 relative z-10">
+                <div class="w-20 h-20 bg-google-green text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <i class="ph-bold ph-check text-4xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Anmeldung erfolgreich!</h3>
+                <p class="text-gray-700 mb-6">Nach erfolgreicher Prüfung deiner Anmeldung erhältst du eine Bestätigung und weitere Informationen per E-Mail.</p>
+                <p class="font-bold text-lg">Wir freuen uns auf DICH 🙂<br><span class="text-google-blue">Dein #TeamPixel</span></p>
+                
+                <button onclick="resetForm()" class="mt-8 text-gray-500 hover:text-google-blue underline">Weitere Person anmelden</button>
+            </div>
+            
+            <!-- Brands Footer inside Card -->
+            <div class="mt-12 pt-6 border-t border-gray-200/50 flex justify-center items-center gap-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+                <span class="font-bold text-xl">Google Pixel</span>
+                <span class="w-px h-6 bg-gray-400"></span>
+                <span class="font-bold">MediaMarkt</span>
+                <span class="font-bold">SATURN</span>
+            </div>
+        </section>
+
+        <!-- Page Footer -->
+        <footer class="text-center py-12 text-gray-500 text-sm">
+            <p>Einladung - Internes Dokument</p>
+        </footer>
+
+    </main>
+
+    <script>
+        function handleRegistration(event) {
+            event.preventDefault();
+            
+            // Verstecke Formular, zeige Erfolgsmeldung
+            document.getElementById('registrationForm').classList.add('hidden');
+            document.getElementById('successMessage').classList.remove('hidden');
+            
+            // Konfetti-Effekt für das gute Gefühl
+            window.scrollTo({ top: document.getElementById('anmeldung').offsetTop - 50, behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            document.getElementById('registrationForm').reset();
+            document.getElementById('registrationForm').classList.remove('hidden');
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
