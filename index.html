@@ -94,7 +94,12 @@
         <!-- Header Section -->
         <header class="text-center mb-16 opacity-0 animate-fade-in-up">
             <div class="inline-flex items-center justify-center p-4 bg-white rounded-full shadow-lg mb-6">
-                <i class="ph-fill ph-google-logo text-4xl mr-2 text-gray-700"></i>
+                <svg class="w-10 h-10 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                </svg>
                 <span class="text-2xl font-bold tracking-tight text-gray-700">Pixel</span>
             </div>
             <h1 class="text-4xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
@@ -210,7 +215,7 @@
                 <p class="text-gray-600 max-w-2xl mx-auto">Die Plätze pro Bootcamp sind auf <strong>40 Personen begrenzt</strong>. Schnell sein lohnt sich! Melde dich jetzt über das Menü an.</p>
             </div>
 
-            <form id="registrationForm" class="max-w-xl mx-auto relative z-10" onsubmit="handleRegistration(event)">
+            <form id="registrationForm" class="max-w-xl mx-auto relative z-10">
                 
                 <!-- City Selection -->
                 <div class="mb-6">
@@ -254,9 +259,9 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="w-full bg-gray-900 hover:bg-google-blue text-white font-bold py-4 px-8 rounded-xl transition-colors duration-300 shadow-lg flex items-center justify-center group">
-                    <span>Jetzt verbindlich anmelden</span>
-                    <i class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                <button id="submitBtn" type="submit" class="w-full bg-gray-900 hover:bg-google-blue text-white font-bold py-4 px-8 rounded-xl transition-colors duration-300 shadow-lg flex items-center justify-center group">
+                    <span id="btnText">Jetzt verbindlich anmelden</span>
+                    <i id="btnIcon" class="ph-bold ph-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                 </button>
             </form>
 
@@ -269,7 +274,7 @@
                 <p class="text-gray-700 mb-6">Nach erfolgreicher Prüfung deiner Anmeldung erhältst du eine Bestätigung und weitere Informationen per E-Mail.</p>
                 <p class="font-bold text-lg">Wir freuen uns auf DICH 🙂<br><span class="text-google-blue">Dein #TeamPixel</span></p>
                 
-                <button onclick="resetForm()" class="mt-8 text-gray-500 hover:text-google-blue underline">Weitere Person anmelden</button>
+                <button id="resetBtn" type="button" class="mt-8 text-gray-500 hover:text-google-blue underline">Weitere Person anmelden</button>
             </div>
             
             <!-- Brands Footer inside Card -->
@@ -282,29 +287,67 @@
         </section>
 
         <!-- Page Footer -->
-        <footer class="text-center py-12 text-gray-500 text-sm">
+        <footer class="text-center py-12 text-gray-500 text-sm flex flex-col items-center">
             <p>Einladung - Internes Dokument</p>
         </footer>
 
     </main>
 
     <script>
-        function handleRegistration(event) {
-            event.preventDefault();
-            
-            // Verstecke Formular, zeige Erfolgsmeldung
-            document.getElementById('registrationForm').classList.add('hidden');
-            document.getElementById('successMessage').classList.remove('hidden');
-            
-            // Konfetti-Effekt für das gute Gefühl
-            window.scrollTo({ top: document.getElementById('anmeldung').offsetTop - 50, behavior: 'smooth' });
-        }
+        // Die verbundene Google Apps Script Web-App URL
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxEogXSa-h4BFaKmFoTINLB7wn2Slp4yO7G9uGBgqZxReurpKH2Fic1hK8gZles5JL4/exec";
 
-        function resetForm() {
-            document.getElementById('registrationForm').reset();
+        document.getElementById('registrationForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const btn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+
+            btn.disabled = true;
+            btnText.innerText = 'Wird gesendet...';
+            btnIcon.classList.replace('ph-arrow-right', 'ph-spinner');
+            btnIcon.classList.add('animate-spin');
+
+            // Daten aus dem Formular sammeln
+            const payload = {
+                location: document.getElementById('location').value,
+                vorname: document.getElementById('vorname').value,
+                nachname: document.getElementById('nachname').value,
+                email: document.getElementById('email').value,
+                markt: document.getElementById('markt').value
+            };
+
+            try {
+                // Sende die Daten an das Google Apps Script
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8', // Verhindert Sicherheitsblockaden (CORS) im Browser
+                    }
+                });
+
+                document.getElementById('registrationForm').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                window.scrollTo({ top: document.getElementById('anmeldung').offsetTop - 50, behavior: 'smooth' });
+            } catch (error) {
+                console.error("Sende-Fehler:", error);
+                alert("Verbindung zur Tabelle fehlgeschlagen. Bitte überprüfe deine Internetverbindung.");
+            } finally {
+                btn.disabled = false;
+                btnText.innerText = 'Jetzt verbindlich anmelden';
+                btnIcon.classList.remove('animate-spin');
+                btnIcon.classList.replace('ph-spinner', 'ph-arrow-right');
+                document.getElementById('registrationForm').reset();
+            }
+        });
+
+        // Formular zurücksetzen für weitere Anmeldung
+        document.getElementById('resetBtn').addEventListener('click', () => {
             document.getElementById('registrationForm').classList.remove('hidden');
             document.getElementById('successMessage').classList.add('hidden');
-        }
+        });
     </script>
 </body>
 </html>
